@@ -67,6 +67,44 @@ body{font-family:var(--f);background:var(--bg);color:var(--ink);min-height:100vh
 .bh-tag-remove:hover{background:var(--red);color:#fff}
 .bh-empty-hint{font-size:11.5px;color:var(--ink3);padding:8px 2px;font-style:italic}
 
+/* CHECKLIST */
+.checklist-card{background:var(--s0);border:1.5px solid var(--gold-border);border-radius:var(--rlg);padding:20px 22px;margin-bottom:16px;position:relative;overflow:hidden}
+.checklist-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),#E0AC2E)}
+.cl-title{font-size:13px;font-weight:800;color:var(--ink);display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.cl-desc{font-size:12px;color:var(--ink2);margin-bottom:16px;line-height:1.5}
+.cl-item{display:flex;align-items:flex-start;gap:12px;padding:12px 4px;border-bottom:1px solid var(--s1)}
+.cl-item:last-child{border-bottom:none}
+.cl-check{width:22px;height:22px;border-radius:6px;border:2px solid var(--b2);background:var(--s0);cursor:pointer;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent;transition:all .15s}
+.cl-check:hover{border-color:var(--gold)}
+.cl-check.checked{background:var(--gold);border-color:var(--gold);color:#fff}
+.cl-item-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px;cursor:pointer}
+.cl-item-desc{font-size:11.5px;color:var(--ink3);line-height:1.55}
+.cl-progress{margin-top:14px;background:var(--s1);border-radius:20px;height:8px;overflow:hidden}
+.cl-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),#E0AC2E);border-radius:20px;transition:width .3s ease;width:0%}
+.cl-progress-label{font-size:11px;color:var(--ink3);margin-top:6px;text-align:right;font-weight:600}
+
+/* ABANDONO CARD (reusa estilo do bh-card) */
+.aband-card{background:var(--s0);border:1px solid var(--b);border-radius:var(--rlg);padding:18px 20px;margin-bottom:16px}
+.aband-count{font-size:10px;font-weight:700;background:var(--red-bg);color:var(--red);padding:3px 10px;border-radius:20px;letter-spacing:.02em;text-transform:none}
+.aband-tag{display:inline-flex;align-items:center;gap:7px;background:var(--red-bg);border:1px solid #FECACA;color:#991B1B;padding:6px 8px 6px 12px;border-radius:20px;font-size:12px;font-weight:500}
+.aband-tag .bh-tag-date{font-family:var(--mono);font-size:10px;color:#B91C1C;background:rgba(255,255,255,.6);padding:1px 7px;border-radius:20px}
+.aband-tag-remove{width:18px;height:18px;border-radius:50%;border:none;background:rgba(0,0,0,.08);color:#991B1B;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .13s;flex-shrink:0}
+.aband-tag-remove:hover{background:var(--red);color:#fff}
+
+/* REPOSIÇÃO CARD (reusa estilo do bh-card, tom verde) */
+.repos-card{background:var(--s0);border:1px solid var(--b);border-radius:var(--rlg);padding:18px 20px;margin-bottom:16px}
+.repos-count{font-size:10px;font-weight:700;background:var(--green-bg);color:var(--green);padding:3px 10px;border-radius:20px;letter-spacing:.02em;text-transform:none}
+.repos-tag{display:inline-flex;align-items:center;gap:7px;background:var(--green-bg);border:1px solid #A7F3D0;color:#065F46;padding:6px 8px 6px 12px;border-radius:20px;font-size:12px;font-weight:500}
+.repos-tag .bh-tag-date{font-family:var(--mono);font-size:10px;color:#047857;background:rgba(255,255,255,.6);padding:1px 7px;border-radius:20px}
+.repos-tag-remove{width:18px;height:18px;border-radius:50%;border:none;background:rgba(0,0,0,.08);color:#065F46;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .13s;flex-shrink:0}
+.repos-tag-remove:hover{background:var(--red);color:#fff}
+.repos-warn{font-size:11px;color:var(--amber);background:var(--amber-bg);border:1px solid var(--gold-border);border-radius:var(--r);padding:8px 12px;margin-top:10px;line-height:1.5;display:flex;gap:7px;align-items:flex-start}
+
+/* DISABLED BUTTON STATE */
+.btn-gold:disabled{opacity:.4;cursor:not-allowed;filter:grayscale(.4)}
+.btn-gold:disabled:hover{background:var(--gold)}
+.lock-hint{font-size:11.5px;color:var(--red);margin-top:8px;font-weight:600;display:none;align-items:center;justify-content:center;gap:5px}
+
 /* BUTTONS */
 .btn{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 18px;border-radius:40px;border:1px solid var(--b);background:var(--s0);font-size:13px;font-weight:600;cursor:pointer;color:var(--ink);font-family:var(--f);transition:all .15s}
 .btn:hover{background:var(--s1)}
@@ -151,6 +189,47 @@ tbody tr:hover td{filter:brightness(.97)}
 <div class="wrap">
 
   <div id="step-upload">
+
+    <div class="checklist-card">
+      <div class="cl-title">✅ Checklist de Pré-Validação</div>
+      <div class="cl-desc">Confirme os 4 pontos abaixo antes de calcular. Isso garante que a base está limpa e evita erros no benefício.</div>
+
+      <div class="cl-item">
+        <div class="cl-check" id="cl-check-1" onclick="toggleCheck(1)"></div>
+        <div>
+          <div class="cl-item-title" onclick="toggleCheck(1)">1. R09 extraído e conferido</div>
+          <div class="cl-item-desc">Extraí o R09 do ponto tel do mês fechado e verifiquei que não há nenhum caso de ETN, Desconexão ou cargos fora do setor técnico (COP, Estoque, Administrativo, Coordenação) sendo carregado indevidamente.</div>
+        </div>
+      </div>
+
+      <div class="cl-item">
+        <div class="cl-check" id="cl-check-2" onclick="toggleCheck(2)"></div>
+        <div>
+          <div class="cl-item-title" onclick="toggleCheck(2)">2. CONVENIA atualizado</div>
+          <div class="cl-item-desc">Conferi que o CONVENIA está atualizado, com cada colaborador no setor e departamento correto.</div>
+        </div>
+      </div>
+
+      <div class="cl-item">
+        <div class="cl-check" id="cl-check-3" onclick="toggleCheck(3)"></div>
+        <div>
+          <div class="cl-item-title" onclick="toggleCheck(3)">3. Sem desligados ativos</div>
+          <div class="cl-item-desc">Verifiquei que não há nenhum colaborador desligado ainda constando como ativo na base.</div>
+        </div>
+      </div>
+
+      <div class="cl-item">
+        <div class="cl-check" id="cl-check-4" onclick="toggleCheck(4)"></div>
+        <div>
+          <div class="cl-item-title" onclick="toggleCheck(4)">4. Jornada 100% e sem abandono de rota</div>
+          <div class="cl-item-desc">Confirmei que a Presença Ouro exige jornada 100% cumprida (VT, IAT, MDU — pessoas em experiência na supervisão não recebem) e verifiquei que não há nenhum abandono de rota que passou despercebido. Todo abandono deve estar formalizado por medida disciplinar e normalmente gera falta no ponto.</div>
+        </div>
+      </div>
+
+      <div class="cl-progress"><div class="cl-progress-fill" id="cl-progress-fill"></div></div>
+      <div class="cl-progress-label" id="cl-progress-label">0 de 4 confirmados</div>
+    </div>
+
     <div class="upload-grid">
       <div class="upload-zone" id="dz-r09">
         <span class="uz-tag uz-req">Obrigatório</span>
@@ -161,11 +240,11 @@ tbody tr:hover td{filter:brightness(.97)}
         <div class="uz-file" id="fn-r09"></div>
       </div>
       <div class="upload-zone" id="dz-conv">
-        <span class="uz-tag uz-rec">Recomendado</span>
+        <span class="uz-tag uz-req">Obrigatório</span>
         <input type="file" id="fi-conv" accept=".xlsx,.xls">
         <div class="uz-icon">👥</div>
         <div class="uz-title">CONVENIA</div>
-        <div class="uz-sub">Nome, CPF, nascimento, admissão, cargo</div>
+        <div class="uz-sub">Nome, CPF, nascimento, admissão, cargo, departamento</div>
         <div class="uz-file" id="fn-conv"></div>
       </div>
     </div>
@@ -186,9 +265,43 @@ tbody tr:hover td{filter:brightness(.97)}
       </div>
     </div>
 
+    <div class="aband-card">
+      <div class="bh-title">
+        <span>🚫 Abandono de rota</span>
+        <span class="aband-count" id="aband-count">0 pessoas adicionadas</span>
+      </div>
+      <div class="bh-desc">Adicione aqui os colaboradores com abandono de rota formalizado por medida disciplinar. Eles perdem a Presença Ouro independente de outras ocorrências.</div>
+      <div class="bh-form">
+        <input type="text" class="bh-input" id="aband-name-input" placeholder="Nome completo do colaborador...">
+        <input type="date" class="bh-date" id="aband-date-input">
+        <button class="bh-add-btn" id="aband-add-btn" style="background:var(--red)">+ Adicionar</button>
+      </div>
+      <div class="bh-list-wrap" id="aband-list-wrap">
+        <div class="bh-empty-hint" id="aband-empty-hint">Nenhum colaborador adicionado ainda.</div>
+      </div>
+    </div>
+
+    <div class="repos-card">
+      <div class="bh-title">
+        <span>📧 Reposição formalizada por e-mail</span>
+        <span class="repos-count" id="repos-count">0 pessoas adicionadas</span>
+      </div>
+      <div class="bh-desc">Adicione aqui os colaboradores que não cumpriram a jornada normal, mas repuseram o dia em um domingo ou feriado, com necessidade do serviço formalizada por e-mail da coordenação/gestão operacional. Eles mantêm a Presença Ouro mesmo com a ocorrência.</div>
+      <div class="bh-form">
+        <input type="text" class="bh-input" id="repos-name-input" placeholder="Nome completo do colaborador...">
+        <input type="date" class="bh-date" id="repos-date-input">
+        <button class="bh-add-btn" id="repos-add-btn" style="background:var(--green)">+ Adicionar</button>
+      </div>
+      <div class="bh-list-wrap" id="repos-list-wrap">
+        <div class="bh-empty-hint" id="repos-empty-hint">Nenhum colaborador adicionado ainda.</div>
+      </div>
+      <div class="repos-warn">⚠️ Só adicione aqui quem tem o e-mail de formalização real. Sem e-mail, a pessoa não entra nessa lista — a ocorrência deve constar normalmente na planilha enviada ao sistema de benefício.</div>
+    </div>
+
     <div class="err-box" id="err-box"></div>
     <div id="proc-act" style="text-align:center">
-      <button class="btn btn-gold" id="proc-btn">★ Calcular Presença Ouro</button>
+      <button class="btn btn-gold" id="proc-btn" disabled>★ Calcular Presença Ouro</button>
+      <div class="lock-hint" id="lock-hint">🔒 Confirme os 4 itens do checklist acima para liberar o cálculo</div>
     </div>
   </div>
 
@@ -278,6 +391,9 @@ tbody tr:hover td{filter:brightness(.97)}
 var XS=window.XLSXStyle||window.XLSX;
 var allPeople=[], taggedR09=[], cargoMap={}, r09Keys=[], r09File=null, convFile=null, empresaInfo={};
 var bhManualEntries=[];
+var abandonoEntries=[];
+var reposEntries=[];
+var checklistState={1:false,2:false,3:false,4:false};
 
 var ELEGIVEIS_DEPT=['TECNICO IAT','TECNICO MDU','TECNICO VT'];
 var EXCLUIDOS_DEPT_KW=['ETN','DESCONEX']; // ETN e Desconexão nunca são elegíveis, independente do cargo
@@ -358,6 +474,99 @@ document.getElementById('bh-date-input').addEventListener('keydown',function(e){
   if(e.key==='Enter'){e.preventDefault();addBHEntry()}
 });
 renderBHList();
+
+// ── ABANDONO DE ROTA (form + tags) ──
+function renderAbandList(){
+  var wrap=document.getElementById('aband-list-wrap');
+  document.getElementById('aband-count').textContent=abandonoEntries.length+' pessoa'+(abandonoEntries.length!==1?'s':'')+' adicionada'+(abandonoEntries.length!==1?'s':'');
+  if(!abandonoEntries.length){
+    wrap.innerHTML='<div class="bh-empty-hint" id="aband-empty-hint">Nenhum colaborador adicionado ainda.</div>';
+    return;
+  }
+  wrap.innerHTML=abandonoEntries.map(function(e,i){
+    var dateLabel=e.date?new Date(e.date+'T12:00:00').toLocaleDateString('pt-BR'):'sem data';
+    return '<span class="aband-tag">'+esc(e.name)+
+      '<span class="bh-tag-date">'+dateLabel+'</span>'+
+      '<button class="aband-tag-remove" onclick="removeAbandEntry('+i+')" title="Remover">✕</button></span>';
+  }).join('');
+}
+function addAbandEntry(){
+  var nameInput=document.getElementById('aband-name-input');
+  var dateInput=document.getElementById('aband-date-input');
+  var name=nameInput.value.trim();
+  if(!name){nameInput.style.borderColor='#C42828';nameInput.focus();return}
+  nameInput.style.borderColor='';
+  abandonoEntries.push({name:name.toUpperCase(), date:dateInput.value});
+  nameInput.value='';dateInput.value='';
+  nameInput.focus();
+  renderAbandList();
+}
+function removeAbandEntry(idx){
+  abandonoEntries.splice(idx,1);
+  renderAbandList();
+}
+document.getElementById('aband-add-btn').addEventListener('click',addAbandEntry);
+document.getElementById('aband-name-input').addEventListener('keydown',function(e){
+  if(e.key==='Enter'){e.preventDefault();document.getElementById('aband-date-input').focus()}
+});
+document.getElementById('aband-date-input').addEventListener('keydown',function(e){
+  if(e.key==='Enter'){e.preventDefault();addAbandEntry()}
+});
+renderAbandList();
+
+// ── REPOSIÇÃO FORMALIZADA (form + tags) ──
+function renderReposList(){
+  var wrap=document.getElementById('repos-list-wrap');
+  document.getElementById('repos-count').textContent=reposEntries.length+' pessoa'+(reposEntries.length!==1?'s':'')+' adicionada'+(reposEntries.length!==1?'s':'');
+  if(!reposEntries.length){
+    wrap.innerHTML='<div class="bh-empty-hint" id="repos-empty-hint">Nenhum colaborador adicionado ainda.</div>';
+    return;
+  }
+  wrap.innerHTML=reposEntries.map(function(e,i){
+    var dateLabel=e.date?new Date(e.date+'T12:00:00').toLocaleDateString('pt-BR'):'sem data';
+    return '<span class="repos-tag">'+esc(e.name)+
+      '<span class="bh-tag-date">'+dateLabel+'</span>'+
+      '<button class="repos-tag-remove" onclick="removeReposEntry('+i+')" title="Remover">✕</button></span>';
+  }).join('');
+}
+function addReposEntry(){
+  var nameInput=document.getElementById('repos-name-input');
+  var dateInput=document.getElementById('repos-date-input');
+  var name=nameInput.value.trim();
+  if(!name){nameInput.style.borderColor='#C42828';nameInput.focus();return}
+  nameInput.style.borderColor='';
+  reposEntries.push({name:name.toUpperCase(), date:dateInput.value});
+  nameInput.value='';dateInput.value='';
+  nameInput.focus();
+  renderReposList();
+}
+function removeReposEntry(idx){
+  reposEntries.splice(idx,1);
+  renderReposList();
+}
+document.getElementById('repos-add-btn').addEventListener('click',addReposEntry);
+document.getElementById('repos-name-input').addEventListener('keydown',function(e){
+  if(e.key==='Enter'){e.preventDefault();document.getElementById('repos-date-input').focus()}
+});
+document.getElementById('repos-date-input').addEventListener('keydown',function(e){
+  if(e.key==='Enter'){e.preventDefault();addReposEntry()}
+});
+renderReposList();
+
+// ── CHECKLIST ──
+function toggleCheck(n){
+  checklistState[n]=!checklistState[n];
+  var el=document.getElementById('cl-check-'+n);
+  el.classList.toggle('checked',checklistState[n]);
+  el.textContent=checklistState[n]?'✓':'';
+  var confirmed=Object.values(checklistState).filter(Boolean).length;
+  document.getElementById('cl-progress-fill').style.width=(confirmed/4*100)+'%';
+  document.getElementById('cl-progress-label').textContent=confirmed+' de 4 confirmados';
+  var allChecked=confirmed===4;
+  var procBtn=document.getElementById('proc-btn');
+  procBtn.disabled=!allChecked;
+  document.getElementById('lock-hint').style.display=allChecked?'none':'flex';
+}
 
 function showErr(m){var b=document.getElementById('err-box');b.textContent=m;b.style.display=m?'block':'none'}
 function prog(p,m){document.getElementById('prog-bar').style.width=p+'%';document.getElementById('prog-pct').textContent=p+'%';if(m)document.getElementById('prog-msg').textContent=m}
@@ -472,6 +681,10 @@ function processR09(wb){
 
   // Parse manual BH list (from form entries)
   var bhManualSet = new Set(bhManualEntries.map(e=>e.name));
+  // Parse manual Abandono de Rota list (from form entries)
+  var abandonoSet = new Set(abandonoEntries.map(e=>e.name));
+  // Parse manual Reposição Formalizada list (from form entries)
+  var reposSet = new Set(reposEntries.map(e=>e.name));
 
   prog(55,'Classificando registros...');
   taggedR09 = raw.map(function(r){
@@ -543,15 +756,18 @@ function processR09(wb){
     if(p.elegDept===false){p.status='fora';p.motivos=[];return}
 
     var m=[];
-    if(p.faltas>0)m.push('Falta');
+    var isRepos=reposSet.has(p.nome.toUpperCase());
+    if(abandonoSet.has(p.nome.toUpperCase()))m.push('Abandono de rota');
+    if(p.faltas>0 && !isRepos)m.push('Falta');
     if(p.ates>0)m.push('Atestado');
     if(p.decl>0)m.push('Declaração');
     if(p.bh>0)m.push('BH comp.');
-    if(p.dc>0)m.push('Dia <5h');
+    if(p.dc>0 && !isRepos)m.push('Dia <5h');
     if(p.sus>0)m.push('Suspensão');
     // Férias: se ficou de férias mais de 5 dias, perde (regra: até 5 dias dá pra analisar, resto tem que ter trabalhado certinho)
     if(p.feriasDias>5)m.push('Férias >5 dias');
     p.motivos=m;
+    p.repos=isRepos;
     p.status=m.length===0?'recebe':'perde';
   });
 
@@ -587,6 +803,7 @@ function statusBadge(s){
   return'<span class="status-badge st-fora">— Fora escopo</span>';
 }
 function motivoColor(m){
+  if(m==='Abandono de rota')return{bg:'#450A0A',fg:'#FEE2E2'};
   if(m==='Suspensão')return{bg:'#FFF1F2',fg:'#BE123C'};
   if(m==='Falta')return{bg:'#FEF2F2',fg:'#DC2626'};
   if(m==='Atestado')return{bg:'#F5F3FF',fg:'#7C3AED'};
@@ -604,6 +821,9 @@ function renderResumo(data){
       p.motivos.forEach(function(m){var c=motivoColor(m);motivoHtml+='<span class="mchip" style="background:'+c.bg+';color:'+c.fg+'">'+m+'</span>'});
     } else if(p.status==='recebe'){
       motivoHtml+='<span style="font-size:11px;color:var(--green)">Sem ocorrências ✓</span>';
+    }
+    if(p.repos){
+      motivoHtml+='<span class="mchip" style="background:#ECFDF5;color:#065F46" title="Reposição formalizada por e-mail">📧 Reposição formalizada</span>';
     }
     motivoHtml+='</div>';
     return'<tr>'+
@@ -690,6 +910,14 @@ document.getElementById('reset-btn').addEventListener('click',function(){
   document.getElementById('fi-r09').value='';
   document.getElementById('fi-conv').value='';
   bhManualEntries=[];renderBHList();
+  abandonoEntries=[];renderAbandList();
+  reposEntries=[];renderReposList();
+  checklistState={1:false,2:false,3:false,4:false};
+  [1,2,3,4].forEach(function(n){var el=document.getElementById('cl-check-'+n);el.classList.remove('checked');el.textContent=''});
+  document.getElementById('cl-progress-fill').style.width='0%';
+  document.getElementById('cl-progress-label').textContent='0 de 4 confirmados';
+  document.getElementById('proc-btn').disabled=true;
+  document.getElementById('lock-hint').style.display='none';
   document.getElementById('step-upload').style.display='block';
   document.getElementById('results').style.display='none';
   showErr('');
@@ -723,7 +951,7 @@ document.getElementById('btn-xl').addEventListener('click',function(){
   XS.utils.book_append_sheet(wb,ws1,'BENEFÍCIO - UPLOAD SISTEMA');
 
   // ── ABA 2: RESUMO (todos, com motivo) ──
-  var hdr2=['Nome','Departamento','CPF','Admissão','Status','Motivo da Perda'];
+  var hdr2=['Nome','Departamento','CPF','Admissão','Status','Motivo da Perda','Reposição Formalizada'];
   var rows2=[hdr2.map(h=>mc(h,HDR,HDR_FG,true))];
   allPeople.forEach(function(p){
     var bg=p.status==='recebe'?'E8F8F1':p.status==='perde'?'FEF0F0':'F3F4F6';
@@ -731,11 +959,12 @@ document.getElementById('btn-xl').addEventListener('click',function(){
     var st=p.status==='recebe'?'✅ Recebe':p.status==='perde'?'✗ Perdeu':'— Fora do escopo';
     rows2.push([
       mc(p.nome,bg,fg,true),mc(p.dept,bg,fg),mc(fmtCPF(p.cpf),bg,fg),mc(fmtDateBR(p.admissao),bg,fg),
-      mc(st,bg,fg,true),mc((p.motivos||[]).join(', '),bg,fg)
+      mc(st,bg,fg,true),mc((p.motivos||[]).join(', '),bg,fg),
+      mc(p.repos?'📧 Sim (e-mail formalizado)':'','E8F8F1',p.repos?'065F46':fg)
     ]);
   });
   var ws2=XS.utils.aoa_to_sheet(rows2,{cellStyles:true});
-  ws2['!cols']=[{wch:42},{wch:14},{wch:16},{wch:14},{wch:18},{wch:36}];
+  ws2['!cols']=[{wch:42},{wch:14},{wch:16},{wch:14},{wch:18},{wch:36},{wch:24}];
   XS.utils.book_append_sheet(wb,ws2,'RESUMO ELEGIBILIDADE');
 
   // ── ABA 3: DETALHADO R09 (colorido) ──
